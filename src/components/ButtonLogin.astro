@@ -1,0 +1,622 @@
+---
+import { SignInButton, SignedOut, SignedIn } from '@clerk/astro/components';
+---
+
+<SignedOut>
+  <label for='button' class='wrap iniciar-sesion-github'>
+    <input id='button' aria-label='Bluetooth' type='checkbox' />
+    <button class='button'>
+      <div class='corner'></div>
+      <div class='inner'>
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'
+          ><path
+            fill='currentColor'
+            d='M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2'
+          ></path></svg
+        >
+      </div>
+    </button>
+    <div class='led'></div>
+    <div class='bg'>
+      <div class='shine-1'></div>
+      <div class='shine-2'></div>
+    </div>
+    <div class='bg-glow'></div>
+  </label>
+</SignedOut>
+
+<SignedIn>
+  <label for='button' class='wrap goToPrivateButton'>
+    <input id='button' aria-label='Bluetooth' type='checkbox' />
+    <button class='button'>
+      <div class='corner'></div>
+      <div class='inner'>
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'
+          ><path
+            fill='currentColor'
+            d='M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2'
+          ></path></svg
+        >
+      </div>
+    </button>
+    <div class='led'></div>
+    <div class='bg'>
+      <div class='shine-1'></div>
+      <div class='shine-2'></div>
+    </div>
+    <div class='bg-glow'></div>
+  </label>
+</SignedIn>
+
+<a class='go-to-private' href='/private/'></a>
+
+<SignInButton class={'buttonModal'} mode='modal' forceRedirectUrl='/private/' />
+
+<script>
+  import { $ } from '@/utils/functions';
+  const signinButton = $('.buttonModal') as HTMLElement;
+  const anchor = $('.go-to-private') as HTMLAnchorElement;
+  document.addEventListener('click', e => {
+    const target = e.target as HTMLElement;
+    if (
+      target.matches('.iniciar-sesion-github') ||
+      target.matches('.iniciar-sesion-github *')
+    ) {
+      signinButton.click();
+    }
+
+    if (
+      target.matches('.goToPrivateButton') ||
+      target.matches('.goToPrivateButton *')
+    ) {
+      anchor.click();
+    }
+  });
+</script>
+
+<style>
+  :global(.cl-modalBackdrop) {
+    align-items: center;
+  }
+
+  .index {
+    visibility: hidden;
+  }
+
+  .wrap {
+    --radius: 1.95vmax;
+    --bg: #2c3238;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    pointer-events: none;
+    width: fit-content;
+    margin-inline: auto;
+    zoom: 0.7;
+  }
+
+  .wrap::before {
+    content: '';
+    position: absolute;
+    width: 22.79vmax;
+    height: 19.53vmax;
+    border-radius: 3.26vmax;
+    filter: blur(3.91vmax);
+    background-color: rgba(255, 255, 255, 0.05);
+    transform: skewY(-20deg);
+  }
+
+  .wrap::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 3.26vmax;
+    filter: blur(1.95vmax);
+  }
+
+  .wrap input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    z-index: 999;
+    cursor: pointer;
+    pointer-events: all;
+    user-select: none;
+  }
+
+  .button {
+    position: relative;
+    overflow: hidden;
+    width: 10.03vmax;
+    height: 9.77vmax;
+    box-shadow:
+      inset 0 0.07vmax 0.07vmax rgb(255 255 255 / 40%),
+      inset 0 -0.39vmax 0.07vmax -0.26vmax #0084ff,
+      inset 0 -0.98vmax 0.39vmax -0.52vmax #003cff;
+    background-color: var(--bg);
+    z-index: 2;
+    border: transparent;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+  }
+
+  .button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: calc(var(--radius) * 0.8);
+    border-top: 3.26vmax solid #414244;
+    border-left: 2.6vmax solid #2b2b2c;
+    border-right: 2.6vmax solid #2b2b2c;
+    border-bottom: 3.26vmax solid #15161a;
+    filter: blur(0.39vmax);
+    transition: all 0.5s ease;
+  }
+
+  .button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 101%;
+    height: 3.26vmax;
+    width: 7.81vmax;
+    border-radius: 3.26vmax 3.26vmax 0 0;
+    filter: contrast(10) blur(0.46vmax);
+    background: #009cff;
+    transition: all 0.3s ease;
+    opacity: 1;
+  }
+
+  .button .corner {
+    transition: all 0.4s ease;
+    opacity: 0.1;
+  }
+
+  .button .corner::before,
+  .button .corner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    border-top: 3.58vmax solid white;
+    border-left: 0.98vmax solid transparent;
+    border-right: 0.98vmax solid transparent;
+    filter: blur(0.39vmax);
+  }
+
+  .button .corner::before {
+    left: 0.52vmax;
+    transform: rotate(-40deg);
+  }
+
+  .button .corner::after {
+    right: 0.52vmax;
+    transform: rotate(40deg);
+  }
+
+  .wrap input:hover + .button .corner {
+    opacity: 0.15;
+  }
+
+  .button .inner {
+    z-index: 9;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(var(--radius) * 0.85);
+    background: linear-gradient(180deg, #232324 5%, #46484b 100%);
+    transition: all 0.3s ease;
+    inset: 1.43vmax 1.3vmax;
+    box-shadow:
+      inset 0 -0.33vmax 0.98vmax -0.07vmax rgba(0, 0, 0, 0.3),
+      inset 0 -0.26vmax 0.2vmax -0.2vmax black,
+      inset 0 -0.65vmax 1.3vmax -0.52vmax rgb(255 255 255 / 40%),
+      inset 0 0.07vmax 0 0.07vmax rgb(255 255 255 / 20%);
+  }
+
+  .button .inner svg {
+    display: block;
+    overflow: visible;
+    width: 4vmax;
+  }
+
+  .button .inner svg .symbol {
+    fill: #212123;
+  }
+
+  .button .inner svg .symbol-path {
+    filter: brightness(1.1) contrast(1.1);
+  }
+
+  .button .inner svg .symbol-path path {
+    stroke-dasharray: 650;
+    stroke-dashoffset: -650;
+    stroke-width: 5;
+    stroke: #3c69ff;
+    animation: symbolPath 2s ease-in-out;
+  }
+
+  .button .inner svg .symbol-path-glow path {
+    stroke-dasharray: 650;
+    stroke-dashoffset: -650;
+    stroke-width: 30;
+    stroke: #0231ce;
+    filter: blur(30px);
+    animation: symbolPath 2s ease-in-out;
+  }
+
+  .button .inner svg .symbol-path circle {
+    fill: #3c69ff;
+    opacity: 0;
+    animation: symbolCircle 2s ease-in-out;
+  }
+
+  .button .inner svg .symbol-path-glow circle {
+    fill: #0231ce;
+    filter: blur(1.95vmax);
+    opacity: 0;
+    animation: symbolCircle 2s ease-in-out;
+  }
+
+  .bg {
+    background-color: black;
+    position: absolute;
+    inset: -0.46vmax;
+    box-shadow: 0 1.3vmax 0.65vmax -0.65vmax rgba(0, 0, 0, 0.3);
+    border-radius: calc(var(--radius) * 1.25);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .bg::before {
+    content: '';
+    position: absolute;
+    border-radius: inherit;
+    box-shadow:
+      inset 0 -0.13vmax 0px -0.07vmax rgb(120 176 255 / 32%),
+      inset 0 0 0.33vmax 0.07vmax black,
+      inset 0 0 0 0.07vmax black;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .bg .shine-1,
+  .bg .shine-2::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    transition: all 0.3s ease;
+    background: rgba(0, 60, 255, 1);
+    width: 0.65vmax;
+    height: 0.65vmax;
+    filter: blur(0.13vmax);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 50%;
+    transform: translateY(0) scale(0);
+    animation: bg 2.4s linear 0.3s;
+  }
+  .bg .shine-2::before {
+    animation: bg 2.4s linear infinite;
+  }
+
+  .bg .shine-2 {
+    transition: all 0.5s linear;
+    opacity: 0;
+  }
+
+  .led {
+    position: absolute;
+    z-index: 10;
+    top: 100%;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background-color: #3aeaf3;
+    width: 0.39vmax;
+    height: 0.39vmax;
+    margin-top: 1.43vmax;
+    box-shadow:
+      0 -0.65vmax 2.28vmax 1.11vmax #003cff,
+      inset 0 0.07vmax 0.13vmax 0px rgba(255, 255, 255, 0.6),
+      0 0 0px 0.2vmax rgb(0 0 0 / 60%),
+      0 0 0.13vmax 0.26vmax rgb(0 79 152 / 80%);
+  }
+
+  .wrap input:active + .button .inner svg .symbol-path path,
+  .wrap input:active + .button .inner svg .symbol-path-glow path,
+  .wrap input:active + .button .inner svg .symbol-path circle,
+  .wrap input:active + .button .inner svg .symbol-path-glow circle,
+  .wrap input:active + .button ~ .bg .shine-1 {
+    animation: none;
+  }
+
+  .wrap input:checked + .button .inner svg .symbol-path path,
+  .wrap input:checked + .button .inner svg .symbol-path-glow path {
+    animation: symbolPath2 2s ease-in-out reverse;
+  }
+  .wrap input:checked + .button .inner svg .symbol-path path {
+    stroke: #b48518;
+  }
+  .wrap input:checked + .button .inner svg .symbol-path-glow path {
+    stroke: #714b00;
+  }
+  .wrap input:checked + .button .inner svg .symbol-path circle {
+    fill: #b48518;
+  }
+  .wrap input:checked + .button .inner svg .symbol-path-glow circle {
+    fill: #714b00;
+  }
+  .wrap input:hover + .button {
+    transform: scale(1.02);
+  }
+  .wrap input:active + .button {
+    transform: scale(0.97);
+    filter: contrast(1.07);
+    background-color: transparent;
+  }
+  .wrap input:active + .button::before {
+    box-shadow: 0 -0.65vmax 0.65vmax 0.65vmax black;
+  }
+  .wrap input:active + .button .inner {
+    background: linear-gradient(180deg, #232324 5%, #3b3d40 100%);
+    box-shadow:
+      inset 0 -0.33vmax 0.98vmax -0.07vmax rgba(0, 0, 0, 0.3),
+      inset 0 -0.26vmax 0.2vmax -0.2vmax black,
+      inset 0 -0.65vmax 1.3vmax -0.52vmax rgb(255 255 255 / 20%),
+      inset 0 0.07vmax 0 0.07vmax rgb(255 255 255 / 10%);
+    transform: scale(0.95);
+  }
+  .wrap input:checked + .button ~ .bg .shine-1 {
+    background-color: rgba(255, 187, 0, 0.7);
+  }
+  .wrap input:not(:checked):hover + .button ~ .bg .shine-2 {
+    opacity: 1;
+  }
+  .wrap input:active + .button .corner,
+  .wrap input:active + .button ~ .bg-glow,
+  .wrap input:not(:checked):active + .button ~ .bg .shine-2 {
+    opacity: 0;
+  }
+
+  .bg-glow {
+    transition: all 0.5s linear;
+  }
+
+  .bg-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, #984fff 0%, black 100%);
+    border-radius: 1.95vmax;
+    filter: blur(0.78vmax);
+    opacity: 0;
+    animation: bgGlow 3s linear backwards;
+  }
+
+  @keyframes bgGlow {
+    0% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 1;
+    }
+    80%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .wrap input:checked + .button ~ .bg-glow::before {
+    background: linear-gradient(to bottom, #ff2200 0%, black 100%);
+    animation: bgGlow2 3s linear backwards;
+  }
+
+  @keyframes bgGlow2 {
+    0% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 1;
+    }
+    70%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .wrap input:checked + .button ~ .led {
+    animation: ledTurnOff 3s linear forwards;
+  }
+
+  @keyframes ledTurnOff {
+    30%,
+    60% {
+      background-color: #ffdf4e;
+      box-shadow:
+        0 -0.65vmax 2.28vmax 1.11vmax rgba(255, 200, 0, 0.6),
+        inset 0 0.07vmax 0.13vmax 0px white,
+        0 0 0px 0.2vmax rgb(0 0 0 / 60%),
+        0 0 0.13vmax 0.26vmax rgba(152, 119, 0, 0.3);
+    }
+    60.1%,
+    65% {
+      background-color: black;
+      box-shadow:
+        0 -0.65vmax 2.28vmax 1.11vmax transparent,
+        inset 0 0.07vmax 0.13vmax 0px transparent,
+        0 0 0px 0.2vmax rgb(0 0 0 / 10%),
+        0 0 0.13vmax 0.26vmax transparent;
+    }
+    65.1%,
+    70% {
+      background-color: #ffdf4e;
+      box-shadow:
+        0 -0.65vmax 2.28vmax 1.11vmax rgba(255, 200, 0, 0.6),
+        inset 0 0.07vmax 0.13vmax 0px white,
+        0 0 0px 0.2vmax rgb(0 0 0 / 60%),
+        0 0 0.13vmax 0.26vmax rgba(152, 119, 0, 0.3);
+    }
+    70.1%,
+    100% {
+      background-color: black;
+      box-shadow:
+        0 -0.65vmax 2.28vmax 1.11vmax transparent,
+        inset 0 0.07vmax 0.13vmax 0px transparent,
+        0 0 0px 0.2vmax rgb(0 0 0 / 10%),
+        0 0 0.13vmax 0.26vmax transparent;
+    }
+  }
+
+  .wrap input:checked + .button {
+    animation: reflexLedTurnOff 3s linear forwards;
+  }
+
+  @keyframes reflexLedTurnOff {
+    30%,
+    60% {
+      box-shadow:
+        inset 0 0.07vmax 0.07vmax rgba(255, 255, 255, 0.4),
+        inset 0 -0.39vmax 0.07vmax -0.26vmax #9b8100,
+        inset 0 -0.98vmax 0.39vmax -0.52vmax #373326;
+    }
+    60.1%,
+    65% {
+      box-shadow:
+        inset 0 0.07vmax 0.07vmax rgba(255, 255, 255, 0.4),
+        inset 0 -0.39vmax 0.07vmax -0.26vmax rgba(255, 255, 255, 0.1),
+        inset 0 -0.98vmax 0.39vmax -0.52vmax rgba(255, 255, 255, 0.1);
+    }
+    65.1%,
+    70% {
+      box-shadow:
+        inset 0 0.07vmax 0.07vmax rgb(255 255 255 / 40%),
+        inset 0 -0.39vmax 0.07vmax -0.26vmax #9b8100,
+        inset 0 -0.98vmax 0.39vmax -0.52vmax #373326;
+    }
+    70.1%,
+    100% {
+      box-shadow:
+        inset 0 0.07vmax 0.07vmax rgba(255, 255, 255, 0.4),
+        inset 0 -0.39vmax 0.07vmax -0.26vmax rgba(255, 255, 255, 0.1),
+        inset 0 -0.98vmax 0.39vmax -0.52vmax rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .wrap input:checked + .button::after {
+    animation: reflexLedBlurTurnOff 3s linear forwards;
+  }
+
+  @keyframes reflexLedBlurTurnOff {
+    30%,
+    60% {
+      background: #ffc400;
+    }
+    60.1%,
+    65% {
+      background: transparent;
+    }
+    65.1%,
+    70% {
+      background: #ffc400;
+    }
+    70.1%,
+    100% {
+      background: transparent;
+    }
+  }
+
+  .wrap input:checked + .button ~ .bg::before {
+    animation: bgBeforeTurnOff 3s linear forwards;
+  }
+
+  @keyframes bgBeforeTurnOff {
+    30%,
+    60% {
+      box-shadow:
+        inset 0 -0.13vmax 0px -0.07vmax rgba(255, 230, 120, 0.3),
+        inset 0 0 0.33vmax 0.07vmax black,
+        inset 0 0 0 0.07vmax black;
+    }
+    60.1%,
+    65% {
+      box-shadow:
+        inset 0 -0.13vmax 0px -0.07vmax rgba(160, 160, 160, 0.3),
+        inset 0 0 0.33vmax 0.07vmax black,
+        inset 0 0 0 0.07vmax black;
+    }
+    65.1%,
+    70% {
+      box-shadow:
+        inset 0 -0.13vmax 0px -0.07vmax rgba(255, 230, 120, 0.3),
+        inset 0 0 0.33vmax 0.07vmax black,
+        inset 0 0 0 0.07vmax black;
+    }
+    70.1%,
+    100% {
+      box-shadow:
+        inset 0 -0.13vmax 0px -0.07vmax rgba(160, 160, 160, 0.3),
+        inset 0 0 0.33vmax 0.07vmax black,
+        inset 0 0 0 0.07vmax black;
+    }
+  }
+
+  @keyframes bg {
+    0% {
+      transform: translateY(0) scale(0);
+    }
+    12% {
+      transform: translateY(0) scale(25);
+    }
+    60%,
+    100% {
+      transform: translateY(-18.2vmax) scale(1.3, 1.17);
+    }
+  }
+
+  @keyframes symbolPath {
+    0% {
+      stroke-dashoffset: -650;
+    }
+    50% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: 650;
+    }
+  }
+
+  @keyframes symbolPath2 {
+    0% {
+      stroke-dashoffset: -650;
+    }
+    50% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: 650;
+    }
+  }
+
+  @keyframes symbolCircle {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+</style>

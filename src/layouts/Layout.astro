@@ -1,0 +1,33 @@
+---
+import '@/styles/global.css';
+---
+
+<!doctype html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width' />
+    <link rel='icon' type='image/svg+xml' href='/assets/favicon.webp' />
+    <title>Auth con Github</title>
+  </head>
+  <body>
+    <div class='background-div'></div>
+    <slot />
+  </body>
+</html>
+
+<style>
+  .background-div {
+    position: fixed;
+    inset: 0;
+    background-image: url('/assets/spectra.avif');
+    background-size: cover;
+  }
+</style>
+
+<!-- <script>
+  window.addEventListener('resize', e => {
+    document.title = `${window.innerWidth}`;
+  });
+</script>
+ -->

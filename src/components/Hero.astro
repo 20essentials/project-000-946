@@ -1,0 +1,47 @@
+---
+import ButtonLogin from './ButtonLogin.astro';
+---
+
+<section>
+  <h1>AUTH CON GITHUB</h1>
+  <ButtonLogin />
+</section>
+
+<style>
+  .iniciar {
+    color: #fff;
+    background-color: skyblue;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  section {
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+    flex-direction: column;
+    gap: 1.2vmax;
+  }
+
+  h1 {
+    font-size: 5vmax;
+    text-align: center;
+    text-wrap: balance;
+    color: transparent;
+    background-image: var(--gradient-btn);
+    background-clip: text;
+    animation: fadeIn 1s ease-in-out forwards;
+
+    @media (width <= 1111px) and (orientation: portrait) {
+      width: 70%;
+    }
+  }
+</style>
